@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestión de Usuarios</title>
+</head>
+<body>
+  <h1>Lista de Usuarios</h1>
+  <ul>
+    <% users.forEach(user => { %>
+      <li><%= user.name %></li>
+    <% }); %>
+  </ul>
+
+  <h2>Agregar Usuario</h2>
+  <form action="/add-user" method="POST">
+    <input type="text" name="name" placeholder="Nombre" required>
+    <button type="submit">Agregar</button>
+  </form>
+</body>
+</html>
