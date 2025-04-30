@@ -1,15 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <title>Pacientes</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+    }
+
+    h1, h2 {
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Lista de Pacientes</h1>
-  <ul>
+  <h1>Pacientes</h1>
+  <form action="/pacientes/agregar" method="GET" style="margin-top: 20px;">
+    <button type="submit">Agregar Paciente</button>
+  </form>
+  <table border="2">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Cédula</th>
+      <th>Email</th>
+      <th>Fecha Nacimiento</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
     <% pacientes.forEach(p => { %>
-      <li><%= p.nombre %> <%= p.apellido %> - <%= p.cedula %></li>
+      <tr>
+        <td><%= p.nombre %></td>
+        <td><%= p.apellido %></td>
+        <td><%= p.cedula %></td>
+        <td><%= p.email %></td>
+        <td><%= p.fechaNacimiento.toISOString().split('T')[0] %></td>
+        <td>
+          <form action="/pacientes/editar/<%= p._id %>" method="GET" style="display:inline;">
+            <button type="submit">Editar</button>
+          </form>
+        
+          <form action="/pacientes/<%= p._id %>?_method=DELETE" method="POST" style="display:inline;">
+            <button type="submit" onclick="return confirm('¿Estás seguro de eliminar este paciente?');">Eliminar</button>
+          </form>
+        </td>
+        
+      </tr>
     <% }) %>
-  </ul>
+  </tbody>
+</table>
+
 </body>
 </html>

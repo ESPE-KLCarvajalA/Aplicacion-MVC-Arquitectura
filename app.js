@@ -1,10 +1,20 @@
 const express = require('express');
-const app = express();
+const mongoose = require('mongoose');
+const methodOverride = require('method-override');
+const bodyParser = require('body-parser');
 const pacienteRoutes = require('./routes/pacienteRoutes');
 
-app.set('view engine', 'ejs');
+const app = express();
+
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
+
+app.set('view engine', 'ejs');
+app.use(express.static('public'));
 
 app.use('/', pacienteRoutes);
 
@@ -12,3 +22,6 @@ const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Servidor en http://localhost:${PORT}`);
 });
+
+
+
