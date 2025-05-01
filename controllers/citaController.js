@@ -18,7 +18,7 @@ const citaController = {
         try {
             const pacientes = await Paciente.find();
             const medicos = await Medico.find();
-            res.render('citas/formulario', { pacientes, medicos });
+            res.render('citas/formulario', { pacientes, medicos, cita: null });
         } catch (err) {
             res.status(500).send('Error al cargar el formulario');
         }
@@ -56,6 +56,15 @@ const citaController = {
             res.redirect('/citas');
         } catch (err) {
             res.status(500).send('Error al actualizar cita');
+        }
+    },
+
+    eliminarCita: async (req, res) => {
+        try {
+            await Cita.findByIdAndDelete(req.params.id);
+            res.redirect('/citas');
+        } catch (err) {
+            res.status(500).send('Error al eliminar la cita');
         }
     }
 };

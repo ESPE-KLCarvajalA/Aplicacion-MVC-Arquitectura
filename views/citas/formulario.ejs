@@ -1,40 +1,75 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8">
-  <title><%= cita ? 'Editar Cita' : 'Agregar Cita' %></title>
+    <meta charset="UTF-8">
+    <title>
+        <%= cita ? 'Editar Cita' : 'Registrar Cita' %>
+    </title>
+    <style>
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input,
+        select {
+            width: 300px;
+            padding: 5px;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 8px 16px;
+        }
+
+        h1 {
+            margin-top: 20px;
+        }
+    </style>
 </head>
+
 <body>
-  <h1><%= cita ? 'Editar Cita' : 'Agregar Cita' %></h1>
+    <h1>
+        <%= cita ? 'Editar Cita' : 'Registrar Nueva Cita' %>
+    </h1>
 
-  <form action="<%= cita ? '/citas/' + cita._id + '?_method=PUT' : '/citas' %>" method="POST">
-    <label>Paciente:</label>
-    <select name="idPaciente" required>
-      <% pacientes.forEach(p => { %>
-        <option value="<%= p._id %>" <%= cita && cita.idPaciente.equals(p._id) ? 'selected' : '' %>>
-          <%= p.nombre %> <%= p.apellido %>
-        </option>
-      <% }) %>
-    </select><br><br>
+    <form action="<%= cita ? '/citas/' + cita._id + '?_method=PUT' : '/citas' %>" method="POST">
+        <label for="idPaciente">Paciente:</label>
+        <select name="idPaciente" required>
+            <% pacientes.forEach(p=> { %>
+                <option value="<%= p._id %>" <%=cita && cita.idPaciente.equals(p._id) ? 'selected' : '' %>>
+                    <%= p.nombre %>
+                </option>
+                <% }) %>
+        </select>
 
-    <label>Médico:</label>
-    <select name="idMedico" required>
-      <% medicos.forEach(m => { %>
-        <option value="<%= m._id %>" <%= cita && cita.idMedico.equals(m._id) ? 'selected' : '' %>>
-          <%= m.nombre %> - <%= m.especialidad %>
-        </option>
-      <% }) %>
-    </select><br><br>
+        <label for="idMedico">Médico:</label>
+        <select name="idMedico" required>
+            <% medicos.forEach(m=> { %>
+                <option value="<%= m._id %>" <%=cita && cita.idMedico.equals(m._id) ? 'selected' : '' %>>
+                    <%= m.nombre %> (<%= m.especialidad %>)
+                </option>
+                <% }) %>
+        </select>
 
-    <label>Fecha y Hora:</label>
-    <input type="datetime-local" name="fechaHora" required
-      value="<%= cita ? new Date(cita.fechaHora).toISOString().slice(0,16) : '' %>"><br><br>
+        <label for="fechaHora">Fecha y hora:</label>
+        <input type="datetime-local" name="fechaHora" required
+            value="<%= cita ? new Date(cita.fechaHora).toISOString().slice(0,16) : '' %>">
 
-    <label>Motivo:</label>
-    <input type="text" name="motivo" value="<%= cita ? cita.motivo : '' %>"><br><br>
+        <label for="motivo">Motivo:</label>
+        <input type="text" name="motivo" required value="<%= cita ? cita.motivo : '' %>">
 
-    <button type="submit"><%= cita ? 'Actualizar' : 'Guardar' %></button>
+        <button type="submit">
+            <%= cita ? 'Actualizar Cita' : 'Guardar Cita' %>
+        </button>
+    </form>
+
     <button type="button" onclick="window.location.href='/citas'">Cancelar</button>
-  </form>
 </body>
+
 </html>
