@@ -2,7 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
+
 const pacienteRoutes = require('./routes/pacienteRoutes');
+const citaRoutes = require('./routes/citaRoutes');
 
 const app = express();
 
@@ -17,6 +19,7 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 app.use('/', pacienteRoutes);
+app.use('/', citaRoutes);
 
 const PORT = 3000;
 app.listen(PORT, () => {
