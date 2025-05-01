@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Médicos</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        h1,
+        h2 {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Listado de Médicos</h1>
+
+    <form action="/medicos/agregar" method="GET" style="margin-top: 20px;">
+        <button type="submit">Agregar Médico</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Especialidad</th>
+                <th>Email</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% medicos.forEach(m => { %>
+                <tr>
+                    <td><%= m.nombre %></td>
+                    <td><%= m.especialidad %></td>
+                    <td><%= m.email %></td>
+                    <td>
+                        <form action="/medicos/editar/<%= m._id %>" method="GET" style="display:inline;">
+                            <button type="submit">Editar</button>
+                        </form>
+
+                        <form action="/medicos/eliminar/<%= m._id %>?_method=POST" method="POST" style="display:inline;">
+                            <button type="submit" onclick="return confirm('¿Estás seguro de eliminar este médico?');">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+
+</html>

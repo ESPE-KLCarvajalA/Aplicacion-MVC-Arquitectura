@@ -1,65 +1,81 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Citas</title>
-  <style>
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
+    <meta charset="UTF-8">
+    <title>Citas</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
 
-    table, th, td {
-      border: 1px solid black;
-    }
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
 
-    th, td {
-      padding: 8px;
-      text-align: left;
-    }
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+        }
 
-    h1, h2 {
-      margin-top: 20px;
-    }
-  </style>
+        h1,
+        h2 {
+            margin-top: 20px;
+        }
+    </style>
 </head>
+
 <body>
-  <h1>Listado de Citas</h1>
+    <h1>Listado de Citas</h1>
 
-  <form action="/citas/agregar" method="GET" style="margin-top: 20px;">
-    <button type="submit">Agregar Cita</button>
-  </form>
+    <form action="/citas/agregar" method="GET" style="margin-top: 20px;">
+        <button type="submit">Agregar Cita</button>
+    </form>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Paciente</th>
-        <th>Médico</th>
-        <th>Fecha y Hora</th>
-        <th>Motivo</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% citas.forEach(c => { %>
-        <tr>
-          <td><%= c.idPaciente.nombre %> <%= c.idPaciente.apellido %></td>
-          <td><%= c.idMedico.nombre %></td>
-          <td><%= new Date(c.fechaHora).toLocaleString('es-ES') %></td>
-          <td><%= c.motivo %></td>
-          <td>
-            <form action="/citas/editar/<%= c._id %>" method="GET" style="display:inline;">
-              <button type="submit">Editar</button>
-            </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Paciente</th>
+                <th>Médico</th>
+                <th>Fecha y Hora</th>
+                <th>Motivo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% citas.forEach(c=> { %>
+                <tr>
+                    <td>
+                        <%= c.idPaciente ? c.idPaciente.nombre + ' ' + c.idPaciente.apellido : 'Paciente no disponible'%>
+                    </td>
+                    <td>
+                        <%= c.idMedico ? c.idMedico.nombre : 'Médico no disponible' %>
+                    </td>
+                    <td>
+                        <%= new Date(c.fechaHora).toLocaleString('es-ES') %>
+                    </td>
+                    <td>
+                        <%= c.motivo %>
+                    </td>
+                    <td>
+                        <form action="/citas/editar/<%= c._id %>" method="GET" style="display:inline;">
+                            <button type="submit">Editar</button>
+                        </form>
 
-            <form action="/citas/<%= c._id %>?_method=DELETE" method="POST" style="display:inline;">
-              <button type="submit" onclick="return confirm('¿Estás seguro de eliminar esta cita?');">Eliminar</button>
-            </form>
-          </td>
-        </tr>
-      <% }) %>
-    </tbody>
-  </table>
+                        <form action="/citas/<%= c._id %>?_method=DELETE" method="POST" style="display:inline;">
+                            <button type="submit"
+                                onclick="return confirm('¿Estás seguro de eliminar esta cita?');">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }) %>
+        </tbody>
+    </table>
 </body>
+
 </html>

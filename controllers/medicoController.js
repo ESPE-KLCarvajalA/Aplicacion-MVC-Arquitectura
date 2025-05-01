@@ -2,11 +2,11 @@ const Medico = require('../models/medicoModel');
 
 const mostrarMedicos = async (req, res) => {
   const medicos = await Medico.find();
-  res.render('medico/index', { medicos });
+  res.render('medicos/index', { medicos });
 };
 
 const mostrarFormularioAgregar = (req, res) => {
-  res.render('medico/agregar');
+  res.render('medicos/agregar');
 };
 
 const agregarMedico = async (req, res) => {
@@ -17,7 +17,7 @@ const agregarMedico = async (req, res) => {
 
 const mostrarFormularioEditar = async (req, res) => {
   const medico = await Medico.findById(req.params.id);
-  res.render('medico/editar', { medico });
+  res.render('medicos/editar', { medico });
 };
 
 const actualizarMedico = async (req, res) => {
