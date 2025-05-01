@@ -44,6 +44,7 @@
             <% pacientes.forEach(p=> { %>
                 <option value="<%= p._id %>" <%=cita && cita.idPaciente.equals(p._id) ? 'selected' : '' %>>
                     <%= p.nombre %>
+                    <%= p.apellido %>
                 </option>
                 <% }) %>
         </select>

@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const medicoSchema = new Schema({
   nombre: { type: String, required: true },
   especialidad: { type: String, required: true },
-  email: { type: String }
+  email: { type: String },
+  telefono: { type: String, required: true}
 });
 
 const Medico = mongoose.model('Medico', medicoSchema);

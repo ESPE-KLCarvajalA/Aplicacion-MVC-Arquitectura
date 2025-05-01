@@ -1,8 +1,56 @@
-<h1>Editar Médico</h1>
-<form action="/medicos/editar/<%= medico._id %>" method="POST">
-  <input name="nombre" value="<%= medico.nombre %>" required><br>
-  <input name="especialidad" value="<%= medico.especialidad %>" required><br>
-  <input name="email" value="<%= medico.email %>"><br>
-  <input name="telefono" value="<%= medico.telefono %>"><br>
-  <button type="submit">Actualizar</button>
-</form>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Editar Médico</title>
+  <style>
+    form {
+      margin-top: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    input,
+    select {
+      width: 300px;
+      padding: 5px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 8px 16px;
+    }
+
+    h1 {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Editar Médico</h1>
+
+  <form action="/medicos/editar/<%= medico._id %>" method="POST">
+    <label for="nombre">Nombre:</label>
+    <input type="text" name="nombre" value="<%= medico.nombre %>" required>
+
+    <label for="especialidad">Especialidad:</label>
+    <input type="text" name="especialidad" value="<%= medico.especialidad %>" required>
+
+    <label for="email">Email:</label>
+    <input type="email" name="email" value="<%= medico.email %>">
+
+    <label for="telefono">Teléfono:</label>
+    <input type="text" name="telefono" value="<%= medico.telefono %>">
+
+    <button type="submit">Actualizar</button>
+  </form>
+
+  <button type="button" onclick="window.location.href='/medicos'">Cancelar</button>
+</body>
+
+</html>

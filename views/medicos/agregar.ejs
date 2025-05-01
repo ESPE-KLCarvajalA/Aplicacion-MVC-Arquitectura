@@ -1,8 +1,56 @@
-<h1>Agregar Médico</h1>
-<form action="/medicos" method="POST">
-  <input name="nombre" placeholder="Nombre" required><br>
-  <input name="especialidad" placeholder="Especialidad" required><br>
-  <input name="email" placeholder="Email"><br>
-  <input name="telefono" placeholder="Teléfono"><br>
-  <button type="submit">Guardar</button>
-</form>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Agregar Médico</title>
+  <style>
+    form {
+      margin-top: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    input,
+    select {
+      width: 300px;
+      padding: 5px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 8px 16px;
+    }
+
+    h1 {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Agregar Médico</h1>
+
+  <form action="/medicos" method="POST">
+    <label for="nombre">Nombre:</label>
+    <input type="text" name="nombre" required>
+
+    <label for="especialidad">Especialidad:</label>
+    <input type="text" name="especialidad" required>
+
+    <label for="email">Email:</label>
+    <input type="email" name="email">
+
+    <label for="telefono">Teléfono:</label>
+    <input type="text" name="telefono">
+
+    <button type="submit">Guardar</button>
+  </form>
+
+  <button type="button" onclick="window.location.href='/medicos'">Cancelar</button>
+</body>
+
+</html>
